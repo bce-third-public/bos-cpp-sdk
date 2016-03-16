@@ -1,0 +1,38 @@
+#edit-mode: -*- python -*-
+#coding:gbk
+
+#工作路径.
+WORKROOT('../../../../../..')
+
+#使用硬链接copy.
+CopyUsingHardLink(True)
+
+#C预处理器参数.
+VERSION="1.0.0.1"
+CPPFLAGS('-D_VERSION=\\\"%s\\\"'%(VERSION))
+# CPPFLAGS('-D_SVN_INFO=\"\\\"URL:`svn info | grep URL | awk \'{print $$2}\'` VERSION:`svn info | grep "Last Changed Rev" | awk \'{print $$4}\'` UUID:`svn info | grep UUID | awk \'{print $$3}\'`\\\"\"')
+CPPFLAGS('-D_DEBUG -D_GNU_SOURCE -D__STDC_LIMIT_MACROS -D__STDC_FORMAT_MACROS -D__BOSS__UNIT_TEST__')
+
+#C编译参数.
+CFLAGS('-g -pipe -W -Wall -fPIC -fsigned-char')
+
+#C++编译参数.
+CXXFLAGS('-g -pipe -W -Wall -fPIC -fsigned-char -Wno-unused-parameter')
+
+# 头文件路径.
+# INCPATHS('. ./include')
+INCPATHS('../../../../../../')
+
+#使用库
+#LIBS('./librbs.a')
+
+#链接参数.
+LDFLAGS('-lpthread -lcrypto -lcrypt -lidn -lldap -luuid -lrt')
+
+#依赖模块
+ENABLE_MULTI_LIBS(True)
+ImportConfigsFrom('..')
+
+Application('file_example', Sources("file_example.cpp"),Libraries('../output/lib/libboss_sdk.a'))
+Application('simple_example', Sources("simple_example.cpp"),Libraries('../output/lib/libboss_sdk.a'))
+Application('bns_example', Sources("bns_example.cpp"),Libraries('../output/lib/libboss_sdk.a'))

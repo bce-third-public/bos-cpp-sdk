@@ -1,0 +1,1098 @@
+#COMAKE2 edit-mode: -*- Makefile -*-
+####################64Bit Mode####################
+ifeq ($(shell uname -m),x86_64)
+CC=gcc
+CXX=g++
+CXXFLAGS=-g \
+  -pipe \
+  -W \
+  -Wall \
+  -fPIC \
+  -fsigned-char \
+  -Wno-unused-parameter \
+  -Werror
+CFLAGS=-g \
+  -pipe \
+  -W \
+  -Wall \
+  -fPIC \
+  -fsigned-char \
+  -Werror
+CPPFLAGS=-D_VERSION=\"1.0.0.0\" \
+  -D_DEBUG \
+  -D_GNU_SOURCE \
+  -D__STDC_LIMIT_MACROS \
+  -D__STDC_FORMAT_MACROS
+INCPATH=-I../../../../../ \
+  -I/usr/include/jsoncpp \
+  -I.
+DEP_INCPATH=-I. \
+
+#============ CCP vars ============
+CCHECK=@ccheck.py
+CCHECK_FLAGS=
+PCLINT=@pclint
+PCLINT_FLAGS=
+CCP=@ccp.py
+CCP_FLAGS=
+
+
+#COMAKE UUID
+COMAKE_MD5=d02613c8e19aa1df934fc18c72fc8611  COMAKE
+
+
+.PHONY:all
+all:libboss_sdk.a 
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mall[0m']"
+	@echo "make all done"
+
+.PHONY:comake2_makefile_check
+comake2_makefile_check:
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mcomake2_makefile_check[0m']"
+	#in case of error, update 'Makefile' by 'comake2'
+	@echo "$(COMAKE_MD5)">comake2.md5
+	@md5sum -c --status comake2.md5
+	@rm -f comake2.md5
+
+.PHONY:ccpclean
+ccpclean:
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mccpclean[0m']"
+	@echo "make ccpclean done"
+
+.PHONY:clean
+clean:ccpclean
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mclean[0m']"
+	rm -rf libboss_sdk.a
+	rm -rf ./output/lib/libboss_sdk.a
+	rm -rf ./output/include/*.h
+	rm -rf ./output/include/*.h
+	rm -rf ./output/include/*.h
+	rm -rf ./output/include/*.h
+	rm -rf ./output/include/*.h
+	rm -rf ./output/include/*.h
+	rm -rf ./output/include/*.h
+	rm -rf http/boss_sdk_http.o
+	rm -rf util/boss_sdk_log.o
+	rm -rf internal/boss_sdk_client_impl.o
+	rm -rf util/boss_sdk_encrypt_util.o
+	rm -rf auth/boss_sdk_auth.o
+	rm -rf bos/model/request/boss_sdk_request.o
+	rm -rf bos/model/response/boss_sdk_response.o
+	rm -rf util/boss_sdk_common_def.o
+	rm -rf auth/boss_sdk_bce_auth.o
+	rm -rf internal/boss_sdk_client.o
+	rm -rf internal/boss_sdk_upload_super_file.o
+	rm -rf internal/boss_sdk_file_tool.o
+	rm -rf util/boss_sdk_bos_log.o
+	rm -rf bos/model/request/boss_sdk_list_multipart_uploads_request.o
+	rm -rf bos/model/request/boss_sdk_list_parts_request.o
+	rm -rf bos/model/request/boss_sdk_complete_multipart_upload_request.o
+	rm -rf bos/model/request/boss_sdk_abort_multipart_upload_request.o
+	rm -rf bos/model/request/boss_sdk_upload_part_request.o
+	rm -rf bos/model/request/boss_sdk_init_multi_upload_request.o
+	rm -rf bos/model/request/boss_sdk_copy_object_request.o
+	rm -rf bos/model/request/boss_sdk_head_object_request.o
+	rm -rf bos/model/request/boss_sdk_delete_object_request.o
+	rm -rf bos/model/request/boss_sdk_get_object_request.o
+	rm -rf bos/model/request/boss_sdk_put_object_request.o
+	rm -rf bos/model/request/boss_sdk_put_bucket_request.o
+	rm -rf bos/model/request/boss_sdk_list_bucket_request.o
+	rm -rf bos/model/request/boss_sdk_list_objects_request.o
+	rm -rf bos/model/request/boss_sdk_head_bucket_request.o
+	rm -rf bos/model/request/boss_sdk_delete_bucket_request.o
+	rm -rf bos/model/request/boss_sdk_get_bucket_configuration_request.o
+	rm -rf bos/model/request/boss_sdk_put_bucket_acl_request.o
+	rm -rf bos/model/request/boss_sdk_get_bucket_acl_request.o
+	rm -rf bos/model/response/boss_sdk_get_bucket_acl_response.o
+	rm -rf bos/model/response/boss_sdk_list_objects_response.o
+	rm -rf bos/model/response/boss_sdk_head_bucket_response.o
+	rm -rf bos/model/response/boss_sdk_get_bucket_configuration_response.o
+	rm -rf bos/model/response/boss_sdk_list_multipart_uploads_response.o
+	rm -rf bos/model/response/boss_sdk_list_parts_response.o
+	rm -rf bos/model/response/boss_sdk_complete_multipart_upload_response.o
+	rm -rf bos/model/response/boss_sdk_abort_multipart_upload_response.o
+	rm -rf bos/model/response/boss_sdk_upload_part_response.o
+	rm -rf bos/model/response/boss_sdk_init_multi_upload_response.o
+	rm -rf bos/model/response/boss_sdk_copy_object_response.o
+	rm -rf bos/model/response/boss_sdk_head_object_response.o
+	rm -rf bos/model/response/boss_sdk_delete_object_response.o
+	rm -rf bos/model/response/boss_sdk_get_object_response.o
+	rm -rf bos/model/response/boss_sdk_http_response.o
+	rm -rf bos/model/response/boss_sdk_list_bucket_response.o
+	rm -rf util/boss_sdk_string_util.o
+	rm -rf util/boss_sdk_time_util.o
+	rm -rf util/boss_sdk_authorization_util.o
+	rm -rf bos/model/request/boss_sdk_get_url.o
+
+.PHONY:dist
+dist:
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mdist[0m']"
+	tar czvf output.tar.gz output
+	@echo "make dist done"
+
+.PHONY:distclean
+distclean:clean
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mdistclean[0m']"
+	rm -f output.tar.gz
+	@echo "make distclean done"
+
+.PHONY:love
+love:
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mlove[0m']"
+	@echo "make love done"
+
+libboss_sdk.a:http/boss_sdk_http.o \
+  util/boss_sdk_log.o \
+  internal/boss_sdk_client_impl.o \
+  util/boss_sdk_encrypt_util.o \
+  auth/boss_sdk_auth.o \
+  bos/model/request/boss_sdk_request.o \
+  bos/model/response/boss_sdk_response.o \
+  util/boss_sdk_common_def.o \
+  auth/boss_sdk_bce_auth.o \
+  internal/boss_sdk_client.o \
+  internal/boss_sdk_upload_super_file.o \
+  internal/boss_sdk_file_tool.o \
+  util/boss_sdk_bos_log.o \
+  bos/model/request/boss_sdk_list_multipart_uploads_request.o \
+  bos/model/request/boss_sdk_list_parts_request.o \
+  bos/model/request/boss_sdk_complete_multipart_upload_request.o \
+  bos/model/request/boss_sdk_abort_multipart_upload_request.o \
+  bos/model/request/boss_sdk_upload_part_request.o \
+  bos/model/request/boss_sdk_init_multi_upload_request.o \
+  bos/model/request/boss_sdk_copy_object_request.o \
+  bos/model/request/boss_sdk_head_object_request.o \
+  bos/model/request/boss_sdk_delete_object_request.o \
+  bos/model/request/boss_sdk_get_object_request.o \
+  bos/model/request/boss_sdk_put_object_request.o \
+  bos/model/request/boss_sdk_put_bucket_request.o \
+  bos/model/request/boss_sdk_list_bucket_request.o \
+  bos/model/request/boss_sdk_list_objects_request.o \
+  bos/model/request/boss_sdk_head_bucket_request.o \
+  bos/model/request/boss_sdk_delete_bucket_request.o \
+  bos/model/request/boss_sdk_get_bucket_configuration_request.o \
+  bos/model/request/boss_sdk_put_bucket_acl_request.o \
+  bos/model/request/boss_sdk_get_bucket_acl_request.o \
+  bos/model/response/boss_sdk_get_bucket_acl_response.o \
+  bos/model/response/boss_sdk_list_objects_response.o \
+  bos/model/response/boss_sdk_head_bucket_response.o \
+  bos/model/response/boss_sdk_get_bucket_configuration_response.o \
+  bos/model/response/boss_sdk_list_multipart_uploads_response.o \
+  bos/model/response/boss_sdk_list_parts_response.o \
+  bos/model/response/boss_sdk_complete_multipart_upload_response.o \
+  bos/model/response/boss_sdk_abort_multipart_upload_response.o \
+  bos/model/response/boss_sdk_upload_part_response.o \
+  bos/model/response/boss_sdk_init_multi_upload_response.o \
+  bos/model/response/boss_sdk_copy_object_response.o \
+  bos/model/response/boss_sdk_head_object_response.o \
+  bos/model/response/boss_sdk_delete_object_response.o \
+  bos/model/response/boss_sdk_get_object_response.o \
+  bos/model/response/boss_sdk_http_response.o \
+  bos/model/response/boss_sdk_list_bucket_response.o \
+  util/boss_sdk_string_util.o \
+  util/boss_sdk_time_util.o \
+  util/boss_sdk_authorization_util.o \
+  bos/model/request/boss_sdk_get_url.o \
+  auth/*.h \
+  bos/*.h \
+  bos/model/request/*.h \
+  bos/model/response/*.h \
+  http/*.h \
+  internal/*.h \
+  util/*.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mlibboss_sdk.a[0m']"
+	ar crs libboss_sdk.a http/boss_sdk_http.o \
+  util/boss_sdk_log.o \
+  internal/boss_sdk_client_impl.o \
+  util/boss_sdk_encrypt_util.o \
+  auth/boss_sdk_auth.o \
+  bos/model/request/boss_sdk_request.o \
+  bos/model/response/boss_sdk_response.o \
+  util/boss_sdk_common_def.o \
+  auth/boss_sdk_bce_auth.o \
+  internal/boss_sdk_client.o \
+  internal/boss_sdk_upload_super_file.o \
+  internal/boss_sdk_file_tool.o \
+  util/boss_sdk_bos_log.o \
+  bos/model/request/boss_sdk_list_multipart_uploads_request.o \
+  bos/model/request/boss_sdk_list_parts_request.o \
+  bos/model/request/boss_sdk_complete_multipart_upload_request.o \
+  bos/model/request/boss_sdk_abort_multipart_upload_request.o \
+  bos/model/request/boss_sdk_upload_part_request.o \
+  bos/model/request/boss_sdk_init_multi_upload_request.o \
+  bos/model/request/boss_sdk_copy_object_request.o \
+  bos/model/request/boss_sdk_head_object_request.o \
+  bos/model/request/boss_sdk_delete_object_request.o \
+  bos/model/request/boss_sdk_get_object_request.o \
+  bos/model/request/boss_sdk_put_object_request.o \
+  bos/model/request/boss_sdk_put_bucket_request.o \
+  bos/model/request/boss_sdk_list_bucket_request.o \
+  bos/model/request/boss_sdk_list_objects_request.o \
+  bos/model/request/boss_sdk_head_bucket_request.o \
+  bos/model/request/boss_sdk_delete_bucket_request.o \
+  bos/model/request/boss_sdk_get_bucket_configuration_request.o \
+  bos/model/request/boss_sdk_put_bucket_acl_request.o \
+  bos/model/request/boss_sdk_get_bucket_acl_request.o \
+  bos/model/response/boss_sdk_get_bucket_acl_response.o \
+  bos/model/response/boss_sdk_list_objects_response.o \
+  bos/model/response/boss_sdk_head_bucket_response.o \
+  bos/model/response/boss_sdk_get_bucket_configuration_response.o \
+  bos/model/response/boss_sdk_list_multipart_uploads_response.o \
+  bos/model/response/boss_sdk_list_parts_response.o \
+  bos/model/response/boss_sdk_complete_multipart_upload_response.o \
+  bos/model/response/boss_sdk_abort_multipart_upload_response.o \
+  bos/model/response/boss_sdk_upload_part_response.o \
+  bos/model/response/boss_sdk_init_multi_upload_response.o \
+  bos/model/response/boss_sdk_copy_object_response.o \
+  bos/model/response/boss_sdk_head_object_response.o \
+  bos/model/response/boss_sdk_delete_object_response.o \
+  bos/model/response/boss_sdk_get_object_response.o \
+  bos/model/response/boss_sdk_http_response.o \
+  bos/model/response/boss_sdk_list_bucket_response.o \
+  util/boss_sdk_string_util.o \
+  util/boss_sdk_time_util.o \
+  util/boss_sdk_authorization_util.o \
+  bos/model/request/boss_sdk_get_url.o
+	mkdir -p ./output/lib
+	cp -f --link libboss_sdk.a ./output/lib
+	mkdir -p ./output/include
+	cp -f --link auth/*.h bos/*.h bos/model/request/*.h bos/model/response/*.h http/*.h internal/*.h util/*.h ./output/include
+
+http/boss_sdk_http.o:http/http.cpp \
+  http/http.h \
+  util/common_def.h \
+  util/memory_stream.h \
+  util/stream.h \
+  bos/model/request/http_request.h \
+  bos/model/response/http_response.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/log.h \
+  util/util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mhttp/boss_sdk_http.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o http/boss_sdk_http.o http/http.cpp
+
+util/boss_sdk_log.o:util/log.cpp \
+  util/log.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mutil/boss_sdk_log.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o util/boss_sdk_log.o util/log.cpp
+
+internal/boss_sdk_client_impl.o:internal/client_impl.cpp \
+  internal/client_impl.h \
+  bos/api.h \
+  util/common_def.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  util/bos_log.h \
+  bos/model/request/put_object_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  bos/model/request/get_object_request.h \
+  bos/model/request/delete_object_request.h \
+  bos/model/request/copy_object_request.h \
+  bos/model/request/init_multi_upload_request.h \
+  util/memory_stream.h \
+  util/stream.h \
+  bos/model/request/upload_part_request.h \
+  bos/model/request/abort_multipart_upload_request.h \
+  bos/model/request/complete_multipart_upload_request.h \
+  util/string_util.h \
+  util/encrypt_util.h \
+  bos/model/request/list_parts_request.h \
+  bos/model/request/list_multipart_uploads_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/list_objects_request.h \
+  bos/model/request/head_bucket_request.h \
+  bos/model/request/delete_bucket_request.h \
+  bos/model/request/put_bucket_acl_request.h \
+  bos/model/request/get_bucket_acl_request.h \
+  bos/model/request/get_bucket_configuration_request.h \
+  bos/model/request/get_url.h \
+  bos/model/request/list_bucket_request.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  bos/model/response/put_object_response.h \
+  bos/model/response/get_object_response.h \
+  bos/model/response/delete_object_response.h \
+  bos/model/request/head_object_request.h \
+  bos/model/response/head_object_response.h \
+  bos/model/response/copy_object_response.h \
+  bos/model/response/init_multi_upload_response.h \
+  bos/model/response/upload_part_response.h \
+  bos/model/response/abort_multipart_upload_response.h \
+  bos/model/response/complete_multipart_upload_response.h \
+  bos/model/response/list_parts_response.h \
+  bos/model/response/list_multipart_uploads_response.h \
+  bos/model/response/put_bucket_response.h \
+  bos/model/request/put_bucket_request.h \
+  bos/model/response/get_bucket_configuration_response.h \
+  bos/model/response/list_objects_response.h \
+  bos/model/response/head_bucket_response.h \
+  bos/model/response/delete_bucket_response.h \
+  bos/model/response/put_bucket_acl_response.h \
+  bos/model/response/get_bucket_acl_response.h \
+  bos/model/response/list_bucket_response.h \
+  util/time_util.h \
+  auth/auth.h \
+  auth/bce_auth.h \
+  util/authorization_util.h \
+  http/http.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40minternal/boss_sdk_client_impl.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o internal/boss_sdk_client_impl.o internal/client_impl.cpp
+
+util/boss_sdk_encrypt_util.o:util/encrypt_util.cpp \
+  util/encrypt_util.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mutil/boss_sdk_encrypt_util.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o util/boss_sdk_encrypt_util.o util/encrypt_util.cpp
+
+auth/boss_sdk_auth.o:auth/auth.cpp \
+  auth/auth.h \
+  util/common_def.h \
+  auth/bce_auth.h \
+  util/authorization_util.h \
+  util/encrypt_util.h \
+  util/exception.h \
+  bos/api.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  util/bos_log.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mauth/boss_sdk_auth.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o auth/boss_sdk_auth.o auth/auth.cpp
+
+bos/model/request/boss_sdk_request.o:bos/model/request/request.cpp \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/common_def.h \
+  util/time_util.h \
+  util/string_util.h \
+  auth/auth.h \
+  auth/bce_auth.h \
+  util/authorization_util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_request.o bos/model/request/request.cpp
+
+bos/model/response/boss_sdk_response.o:bos/model/response/response.cpp \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/memory_stream.h \
+  util/stream.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_response.o bos/model/response/response.cpp
+
+util/boss_sdk_common_def.o:util/common_def.cpp \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mutil/boss_sdk_common_def.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o util/boss_sdk_common_def.o util/common_def.cpp
+
+auth/boss_sdk_bce_auth.o:auth/bce_auth.cpp \
+  auth/bce_auth.h \
+  util/authorization_util.h \
+  util/common_def.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mauth/boss_sdk_bce_auth.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o auth/boss_sdk_bce_auth.o auth/bce_auth.cpp
+
+internal/boss_sdk_client.o:internal/client.cpp \
+  bos/api.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  util/bos_log.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  internal/client_impl.h \
+  bos/model/request/put_object_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  bos/model/request/get_object_request.h \
+  bos/model/request/delete_object_request.h \
+  bos/model/request/copy_object_request.h \
+  bos/model/request/init_multi_upload_request.h \
+  util/memory_stream.h \
+  util/stream.h \
+  bos/model/request/upload_part_request.h \
+  bos/model/request/abort_multipart_upload_request.h \
+  bos/model/request/complete_multipart_upload_request.h \
+  util/string_util.h \
+  util/encrypt_util.h \
+  bos/model/request/list_parts_request.h \
+  bos/model/request/list_multipart_uploads_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/list_objects_request.h \
+  bos/model/request/head_bucket_request.h \
+  bos/model/request/delete_bucket_request.h \
+  bos/model/request/put_bucket_acl_request.h \
+  bos/model/request/get_bucket_acl_request.h \
+  bos/model/request/get_bucket_configuration_request.h \
+  bos/model/request/get_url.h \
+  bos/model/request/list_bucket_request.h \
+  bos/model/response/put_object_response.h \
+  bos/model/response/get_object_response.h \
+  bos/model/response/delete_object_response.h \
+  bos/model/request/head_object_request.h \
+  bos/model/response/head_object_response.h \
+  bos/model/response/copy_object_response.h \
+  bos/model/response/init_multi_upload_response.h \
+  bos/model/response/upload_part_response.h \
+  bos/model/response/abort_multipart_upload_response.h \
+  bos/model/response/complete_multipart_upload_response.h \
+  bos/model/response/list_parts_response.h \
+  bos/model/response/list_multipart_uploads_response.h \
+  bos/model/response/put_bucket_response.h \
+  bos/model/request/put_bucket_request.h \
+  bos/model/response/get_bucket_configuration_response.h \
+  bos/model/response/list_objects_response.h \
+  bos/model/response/head_bucket_response.h \
+  bos/model/response/delete_bucket_response.h \
+  bos/model/response/put_bucket_acl_response.h \
+  bos/model/response/get_bucket_acl_response.h \
+  bos/model/response/list_bucket_response.h \
+  internal/file_tool.h \
+  internal/upload_file.h \
+  util/file_stream.h \
+  internal/download_file.h \
+  internal/upload_super_file.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40minternal/boss_sdk_client.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o internal/boss_sdk_client.o internal/client.cpp
+
+internal/boss_sdk_upload_super_file.o:internal/upload_super_file.cpp \
+  internal/upload_super_file.h \
+  bos/api.h \
+  util/file_stream.h \
+  util/stream.h \
+  bos/model/request/bos_constraint.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/common_def.h \
+  internal/client_impl.h \
+  bos/model/request/put_object_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/get_object_request.h \
+  bos/model/request/delete_object_request.h \
+  bos/model/request/copy_object_request.h \
+  bos/model/request/init_multi_upload_request.h \
+  util/memory_stream.h \
+  bos/model/request/upload_part_request.h \
+  bos/model/request/abort_multipart_upload_request.h \
+  bos/model/request/complete_multipart_upload_request.h \
+  util/string_util.h \
+  util/encrypt_util.h \
+  bos/model/request/list_parts_request.h \
+  bos/model/request/list_multipart_uploads_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/list_objects_request.h \
+  bos/model/request/head_bucket_request.h \
+  bos/model/request/delete_bucket_request.h \
+  bos/model/request/put_bucket_acl_request.h \
+  bos/model/request/get_bucket_acl_request.h \
+  bos/model/request/get_bucket_configuration_request.h \
+  bos/model/request/get_url.h \
+  bos/model/request/list_bucket_request.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  bos/model/response/put_object_response.h \
+  bos/model/response/get_object_response.h \
+  bos/model/response/delete_object_response.h \
+  bos/model/request/head_object_request.h \
+  bos/model/response/head_object_response.h \
+  bos/model/response/copy_object_response.h \
+  bos/model/response/init_multi_upload_response.h \
+  bos/model/response/upload_part_response.h \
+  bos/model/response/abort_multipart_upload_response.h \
+  bos/model/response/complete_multipart_upload_response.h \
+  bos/model/response/list_parts_response.h \
+  bos/model/response/list_multipart_uploads_response.h \
+  bos/model/response/put_bucket_response.h \
+  bos/model/request/put_bucket_request.h \
+  bos/model/response/get_bucket_configuration_response.h \
+  bos/model/response/list_objects_response.h \
+  bos/model/response/head_bucket_response.h \
+  bos/model/response/delete_bucket_response.h \
+  bos/model/response/put_bucket_acl_response.h \
+  bos/model/response/get_bucket_acl_response.h \
+  bos/model/response/list_bucket_response.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40minternal/boss_sdk_upload_super_file.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o internal/boss_sdk_upload_super_file.o internal/upload_super_file.cpp
+
+internal/boss_sdk_file_tool.o:internal/file_tool.cpp \
+  internal/file_tool.h \
+  internal/upload_file.h \
+  bos/api.h \
+  bos/model/request/put_object_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  util/common_def.h \
+  bos/model/response/put_object_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/file_stream.h \
+  util/stream.h \
+  internal/client_impl.h \
+  bos/model/request/get_object_request.h \
+  bos/model/request/delete_object_request.h \
+  bos/model/request/copy_object_request.h \
+  bos/model/request/init_multi_upload_request.h \
+  util/memory_stream.h \
+  bos/model/request/upload_part_request.h \
+  bos/model/request/abort_multipart_upload_request.h \
+  bos/model/request/complete_multipart_upload_request.h \
+  util/string_util.h \
+  util/encrypt_util.h \
+  bos/model/request/list_parts_request.h \
+  bos/model/request/list_multipart_uploads_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/list_objects_request.h \
+  bos/model/request/head_bucket_request.h \
+  bos/model/request/delete_bucket_request.h \
+  bos/model/request/put_bucket_acl_request.h \
+  bos/model/request/get_bucket_acl_request.h \
+  bos/model/request/get_bucket_configuration_request.h \
+  bos/model/request/get_url.h \
+  bos/model/request/list_bucket_request.h \
+  bos/model/response/get_object_response.h \
+  bos/model/response/delete_object_response.h \
+  bos/model/request/head_object_request.h \
+  bos/model/response/head_object_response.h \
+  bos/model/response/copy_object_response.h \
+  bos/model/response/init_multi_upload_response.h \
+  bos/model/response/upload_part_response.h \
+  bos/model/response/abort_multipart_upload_response.h \
+  bos/model/response/complete_multipart_upload_response.h \
+  bos/model/response/list_parts_response.h \
+  bos/model/response/list_multipart_uploads_response.h \
+  bos/model/response/put_bucket_response.h \
+  bos/model/request/put_bucket_request.h \
+  bos/model/response/get_bucket_configuration_response.h \
+  bos/model/response/list_objects_response.h \
+  bos/model/response/head_bucket_response.h \
+  bos/model/response/delete_bucket_response.h \
+  bos/model/response/put_bucket_acl_response.h \
+  bos/model/response/get_bucket_acl_response.h \
+  bos/model/response/list_bucket_response.h \
+  internal/download_file.h \
+  internal/upload_super_file.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40minternal/boss_sdk_file_tool.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o internal/boss_sdk_file_tool.o internal/file_tool.cpp
+
+util/boss_sdk_bos_log.o:util/bos_log.cpp \
+  util/bos_log.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mutil/boss_sdk_bos_log.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o util/boss_sdk_bos_log.o util/bos_log.cpp
+
+bos/model/request/boss_sdk_list_multipart_uploads_request.o:bos/model/request/list_multipart_uploads_request.cpp \
+  bos/model/request/list_multipart_uploads_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/bos_constraint.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_list_multipart_uploads_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_list_multipart_uploads_request.o bos/model/request/list_multipart_uploads_request.cpp
+
+bos/model/request/boss_sdk_list_parts_request.o:bos/model/request/list_parts_request.cpp \
+  bos/model/request/list_parts_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_list_parts_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_list_parts_request.o bos/model/request/list_parts_request.cpp
+
+bos/model/request/boss_sdk_complete_multipart_upload_request.o:bos/model/request/complete_multipart_upload_request.cpp \
+  bos/model/request/complete_multipart_upload_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  util/common_def.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/string_util.h \
+  util/encrypt_util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_complete_multipart_upload_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_complete_multipart_upload_request.o bos/model/request/complete_multipart_upload_request.cpp
+
+bos/model/request/boss_sdk_abort_multipart_upload_request.o:bos/model/request/abort_multipart_upload_request.cpp \
+  bos/model/request/abort_multipart_upload_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_abort_multipart_upload_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_abort_multipart_upload_request.o bos/model/request/abort_multipart_upload_request.cpp
+
+bos/model/request/boss_sdk_upload_part_request.o:bos/model/request/upload_part_request.cpp \
+  bos/model/request/upload_part_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  util/common_def.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/encrypt_util.h \
+  util/string_util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_upload_part_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_upload_part_request.o bos/model/request/upload_part_request.cpp
+
+bos/model/request/boss_sdk_init_multi_upload_request.o:bos/model/request/init_multi_upload_request.cpp \
+  bos/model/request/init_multi_upload_request.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/common_def.h \
+  bos/model/request/object_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_init_multi_upload_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_init_multi_upload_request.o bos/model/request/init_multi_upload_request.cpp
+
+bos/model/request/boss_sdk_copy_object_request.o:bos/model/request/copy_object_request.cpp \
+  bos/model/request/copy_object_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  util/common_def.h \
+  util/memory_stream.h \
+  util/stream.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_copy_object_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_copy_object_request.o bos/model/request/copy_object_request.cpp
+
+bos/model/request/boss_sdk_head_object_request.o:bos/model/request/head_object_request.cpp \
+  bos/model/request/head_object_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_head_object_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_head_object_request.o bos/model/request/head_object_request.cpp
+
+bos/model/request/boss_sdk_delete_object_request.o:bos/model/request/delete_object_request.cpp \
+  bos/model/request/delete_object_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_delete_object_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_delete_object_request.o bos/model/request/delete_object_request.cpp
+
+bos/model/request/boss_sdk_get_object_request.o:bos/model/request/get_object_request.cpp \
+  bos/model/request/get_object_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_get_object_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_get_object_request.o bos/model/request/get_object_request.cpp
+
+bos/model/request/boss_sdk_put_object_request.o:bos/model/request/put_object_request.cpp \
+  bos/model/request/put_object_request.h \
+  bos/model/request/object_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  util/common_def.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/encrypt_util.h \
+  util/string_util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_put_object_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_put_object_request.o bos/model/request/put_object_request.cpp
+
+bos/model/request/boss_sdk_put_bucket_request.o:bos/model/request/put_bucket_request.cpp \
+  bos/model/request/put_bucket_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/bos_constraint.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/common_def.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/encrypt_util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_put_bucket_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_put_bucket_request.o bos/model/request/put_bucket_request.cpp
+
+bos/model/request/boss_sdk_list_bucket_request.o:bos/model/request/list_bucket_request.cpp \
+  bos/model/request/list_bucket_request.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  bos/model/request/bos_constraint.h \
+  util/exception.h \
+  util/common_def.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/encrypt_util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_list_bucket_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_list_bucket_request.o bos/model/request/list_bucket_request.cpp
+
+bos/model/request/boss_sdk_list_objects_request.o:bos/model/request/list_objects_request.cpp \
+  bos/model/request/list_objects_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/bos_constraint.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_list_objects_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_list_objects_request.o bos/model/request/list_objects_request.cpp
+
+bos/model/request/boss_sdk_head_bucket_request.o:bos/model/request/head_bucket_request.cpp \
+  bos/model/request/head_bucket_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/bos_constraint.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_head_bucket_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_head_bucket_request.o bos/model/request/head_bucket_request.cpp
+
+bos/model/request/boss_sdk_delete_bucket_request.o:bos/model/request/delete_bucket_request.cpp \
+  bos/model/request/delete_bucket_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/bos_constraint.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_delete_bucket_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_delete_bucket_request.o bos/model/request/delete_bucket_request.cpp
+
+bos/model/request/boss_sdk_get_bucket_configuration_request.o:bos/model/request/get_bucket_configuration_request.cpp \
+  bos/model/request/get_bucket_configuration_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/bos_constraint.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_get_bucket_configuration_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_get_bucket_configuration_request.o bos/model/request/get_bucket_configuration_request.cpp
+
+bos/model/request/boss_sdk_put_bucket_acl_request.o:bos/model/request/put_bucket_acl_request.cpp \
+  bos/model/request/put_bucket_acl_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/bos_constraint.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_put_bucket_acl_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_put_bucket_acl_request.o bos/model/request/put_bucket_acl_request.cpp
+
+bos/model/request/boss_sdk_get_bucket_acl_request.o:bos/model/request/get_bucket_acl_request.cpp \
+  bos/model/request/get_bucket_acl_request.h \
+  bos/model/request/bucket_request.h \
+  bos/model/request/bos_constraint.h \
+  bos/model/request/request.h \
+  bos/model/request/http_request.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/common_def.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_get_bucket_acl_request.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_get_bucket_acl_request.o bos/model/request/get_bucket_acl_request.cpp
+
+bos/model/response/boss_sdk_get_bucket_acl_response.o:bos/model/response/get_bucket_acl_response.cpp \
+  bos/model/response/get_bucket_acl_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_get_bucket_acl_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_get_bucket_acl_response.o bos/model/response/get_bucket_acl_response.cpp
+
+bos/model/response/boss_sdk_list_objects_response.o:bos/model/response/list_objects_response.cpp \
+  bos/model/response/list_objects_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_list_objects_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_list_objects_response.o bos/model/response/list_objects_response.cpp
+
+bos/model/response/boss_sdk_head_bucket_response.o:bos/model/response/head_bucket_response.cpp \
+  bos/model/response/head_bucket_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_head_bucket_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_head_bucket_response.o bos/model/response/head_bucket_response.cpp
+
+bos/model/response/boss_sdk_get_bucket_configuration_response.o:bos/model/response/get_bucket_configuration_response.cpp \
+  bos/model/response/get_bucket_configuration_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_get_bucket_configuration_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_get_bucket_configuration_response.o bos/model/response/get_bucket_configuration_response.cpp
+
+bos/model/response/boss_sdk_list_multipart_uploads_response.o:bos/model/response/list_multipart_uploads_response.cpp \
+  bos/model/response/list_multipart_uploads_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_list_multipart_uploads_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_list_multipart_uploads_response.o bos/model/response/list_multipart_uploads_response.cpp
+
+bos/model/response/boss_sdk_list_parts_response.o:bos/model/response/list_parts_response.cpp \
+  bos/model/response/list_parts_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_list_parts_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_list_parts_response.o bos/model/response/list_parts_response.cpp
+
+bos/model/response/boss_sdk_complete_multipart_upload_response.o:bos/model/response/complete_multipart_upload_response.cpp \
+  bos/model/response/complete_multipart_upload_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_complete_multipart_upload_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_complete_multipart_upload_response.o bos/model/response/complete_multipart_upload_response.cpp
+
+bos/model/response/boss_sdk_abort_multipart_upload_response.o:bos/model/response/abort_multipart_upload_response.cpp \
+  bos/model/response/abort_multipart_upload_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_abort_multipart_upload_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_abort_multipart_upload_response.o bos/model/response/abort_multipart_upload_response.cpp
+
+bos/model/response/boss_sdk_upload_part_response.o:bos/model/response/upload_part_response.cpp \
+  bos/model/response/upload_part_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_upload_part_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_upload_part_response.o bos/model/response/upload_part_response.cpp
+
+bos/model/response/boss_sdk_init_multi_upload_response.o:bos/model/response/init_multi_upload_response.cpp \
+  bos/model/response/init_multi_upload_response.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/common_def.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_init_multi_upload_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_init_multi_upload_response.o bos/model/response/init_multi_upload_response.cpp
+
+bos/model/response/boss_sdk_copy_object_response.o:bos/model/response/copy_object_response.cpp \
+  bos/model/response/copy_object_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_copy_object_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_copy_object_response.o bos/model/response/copy_object_response.cpp
+
+bos/model/response/boss_sdk_head_object_response.o:bos/model/response/head_object_response.cpp \
+  bos/model/response/head_object_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_head_object_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_head_object_response.o bos/model/response/head_object_response.cpp
+
+bos/model/response/boss_sdk_delete_object_response.o:bos/model/response/delete_object_response.cpp \
+  bos/model/response/delete_object_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_delete_object_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_delete_object_response.o bos/model/response/delete_object_response.cpp
+
+bos/model/response/boss_sdk_get_object_response.o:bos/model/response/get_object_response.cpp \
+  bos/model/response/get_object_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_get_object_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_get_object_response.o bos/model/response/get_object_response.cpp
+
+bos/model/response/boss_sdk_http_response.o:bos/model/response/http_response.cpp \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/exception.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_http_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_http_response.o bos/model/response/http_response.cpp
+
+bos/model/response/boss_sdk_list_bucket_response.o:bos/model/response/list_bucket_response.cpp \
+  bos/model/response/list_bucket_response.h \
+  bos/model/response/response.h \
+  bos/model/response/http_response.h \
+  util/common_def.h \
+  bos/api.h \
+  util/bos_log.h \
+  util/memory_stream.h \
+  util/stream.h \
+  util/exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/response/boss_sdk_list_bucket_response.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/response/boss_sdk_list_bucket_response.o bos/model/response/list_bucket_response.cpp
+
+util/boss_sdk_string_util.o:util/string_util.cpp \
+  util/string_util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mutil/boss_sdk_string_util.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o util/boss_sdk_string_util.o util/string_util.cpp
+
+util/boss_sdk_time_util.o:util/time_util.cpp \
+  util/time_util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mutil/boss_sdk_time_util.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o util/boss_sdk_time_util.o util/time_util.cpp
+
+util/boss_sdk_authorization_util.o:util/authorization_util.cpp \
+  util/authorization_util.h \
+  util/string_util.h \
+  util/time_util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mutil/boss_sdk_authorization_util.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o util/boss_sdk_authorization_util.o util/authorization_util.cpp
+
+bos/model/request/boss_sdk_get_url.o:bos/model/request/get_url.cpp \
+  bos/model/request/get_url.h \
+  bos/model/request/http_request.h \
+  util/bos_log.h \
+  util/string_util.h \
+  util/authorization_util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbos/model/request/boss_sdk_get_url.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o bos/model/request/boss_sdk_get_url.o bos/model/request/get_url.cpp
+
+endif #ifeq ($(shell uname -m),x86_64)
+
+
